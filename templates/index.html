@@ -1,56 +1,38 @@
 {% extends "layout.html" %}
 {% block content %}
-<nav class="navbar navbar-light bg-light container-fluid">
-    <div class="d-flex flex-row justify-content-start">
-    <a class="p-2 nav-link" href="#">Planet List</a>
+    <nav class="navbar navbar-light bg-light container-fluid">
+        <div class="d-flex flex-row justify-content-start">
+            <a class="p-2 nav-link" href="#">Planet List</a>
 
-    <a class="p-2 nav-link" href="#">Voting statistics</a>
+            <a class="p-2 nav-link" href="#">Voting statistics</a>
 
-    <a class="p-2 nav-link" href="#">Registration</a>
+            <a class="p-2 nav-link" href="#">Registration</a>
 
-    <a class="p-2 nav-link" href="#">Login</a>
+            <a class="p-2 nav-link" href="#">Login</a>
 
-    <a class="p-2 nav-link" href="#">Logout</a>
+            <a class="p-2 nav-link" href="#">Logout</a>
 
-    <div class="col navbar-text text-right justify-content-end">Logged in</div>
+            <div class="col navbar-text text-right justify-content-end">Logged in</div>
+        </div>
+    </nav>
+
+    <div class="container-fluid" id="contentPart">
+        <h1>Star Wars universe planets</h1>
+        <button type="button" class="btn btn-primary" id="previousPage">Previous</button>
+        <button type="button" class="btn btn-primary" id="nextPage">Next</button>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Diameter in km</th>
+                <th>Climate</th>
+                <th>Terrain</th>
+                <th>Surface water percentage</th>
+                <th>Population</th>
+            </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
     </div>
-</nav>
-
-
-
-
-
-<div class="container-fluid" id="content">
-<h1>Star Wars universe planets</h1>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Diameter in km</th>
-            <th>Climate</th>
-            <th>Terrain</th>
-            <th>Surface water percentage</th>
-            <th>Population</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Otto</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>Otto</td>
-            <td>Otto</td>
-            <td>Otto</td>
-        </tr>
-        <tr>
-            <td>Otto</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>Otto</td>
-            <td>Otto</td>
-            <td>Otto</td>
-        </tr>
-    </tbody>
-</table>
-</div>
 {% endblock %}
