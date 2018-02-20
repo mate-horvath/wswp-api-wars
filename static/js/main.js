@@ -1,6 +1,6 @@
 // This function is to initialize the application
 function init() {
-    data.loadData();
+    dom.loadData('https://swapi.co/api/planets/');
 }
 
 init();

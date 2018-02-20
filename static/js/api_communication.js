@@ -1,8 +1,8 @@
 let apiHandler = {
-    getAllData: function (callback) {
+    getAllData: function (callback, url) {
         $.ajax({
             dataType: "json",
-            url: 'https://swapi.co/api/planets/',
+            url: url,
             success: function(response) {
                 callback(response);
         }
