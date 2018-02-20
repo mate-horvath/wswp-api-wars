@@ -1,10 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
+<nav class="navbar navbar-light bg-light container-fluid">
+    <div class="d-flex flex-row justify-content-start">
+    <a class="p-2 nav-link" href="#">Planet List</a>
 
-</body>
-</html>
+    <a class="p-2 nav-link" href="#">Voting statistics</a>
+
+    <a class="p-2 nav-link" href="#">Registration</a>
+
+    <a class="p-2 nav-link" href="#">Login</a>
+
+    <a class="p-2 nav-link" href="#">Logout</a>
+
+    <div class="col navbar-text text-right justify-content-end">Logged in</div>
+    </div>
+</nav>
+
+
+
+
+
+<div class="container-fluid" id="content">
+<h1>Star Wars universe planets</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Diameter in km</th>
+            <th>Climate</th>
+            <th>Terrain</th>
+            <th>Surface water percentage</th>
+            <th>Population</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Otto</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>Otto</td>
+            <td>Otto</td>
+            <td>Otto</td>
+        </tr>
+        <tr>
+            <td>Otto</td>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>Otto</td>
+            <td>Otto</td>
+            <td>Otto</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+{% endblock %}
