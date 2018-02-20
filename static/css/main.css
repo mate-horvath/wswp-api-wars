@@ -1,0 +1,14 @@
+.navbar {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    background-color: ghostwhite !important;
+}
+
+a.nav-link {
+    margin-right: 25px !important;
+    color: gray !important;
+}
+
+#content {
+    margin: 15px 50px  !important;
+}
