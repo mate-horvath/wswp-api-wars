@@ -9,6 +9,11 @@ a.nav-link {
     color: gray !important;
 }
 
-#content {
+#contentPart {
     margin: 15px 50px  !important;
+}
+
+button {
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
 }
