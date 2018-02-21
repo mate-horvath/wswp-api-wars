@@ -43,6 +43,22 @@ let dom = {
                     </button>
                   </div>
                   <div class="modal-body">
+                  <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Height</th>
+                        <th>Mass</th>
+                        <th>Hair color</th>
+                        <th>Skin color</th>
+                        <th>Eye color</th>
+                        <th>Birth year</th>
+                        <th>Gender</th>
+                    </tr>
+                  </thead>
+            <tbody id="${val["name"]}ModalBody">
+            </tbody>
+                  </table>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -56,7 +72,10 @@ let dom = {
             //Add modal button to table if residents are present
             if (val["residents"].length > 0) {
                 let modalButton = `<button type="button" class="btn" data-toggle="modal" data-target="#${val["name"]}Modal">${val["residents"].length} resident(s)</button>`;
-                $(modalButton).appendTo("#" + val["name"] + "ModalButton")
+                $(modalButton).appendTo("#" + val["name"] + "ModalButton");
+                $("#" + val["name"] + "ModalButton").bind("click", function () {
+                    apiHandler.getModalData(val["name"] ,val["residents"], dom.showModalData)
+                })
             }
         });
 
@@ -70,6 +89,24 @@ let dom = {
         });
         $("#nextPage").bind("click", function () {
             dom.loadData(next)
+        })
+    },
+    showModalData: function (planetName, residents) {
+        $("#" + planetName + "ModalBody").empty();
+        $.each(residents, function (index, values) {
+        values = JSON.parse(values);
+            let content = `<tr>
+            <td>${values["name"]}</td>
+            <td>${values["height"]}</td>
+            <td>${values["mass"]}</td>
+            <td>${values["hair_color"]}</td>
+            <td>${values["skin_color"]}</td>
+            <td>${values["eye_color"]}</td>
+            <td>${values["birth_year"]}</td>
+            <td>${values["gender"]}</td>
+            </tr>`;
+        let newNode = $(content);
+        newNode.appendTo("#" + planetName + "ModalBody")
         })
     }
 };
