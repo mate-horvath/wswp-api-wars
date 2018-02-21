@@ -3,6 +3,7 @@ import sql
 import data_manager
 
 app = Flask(__name__)
+app.secret_key = 'secret'
 
 
 @app.route('/')
@@ -30,7 +31,15 @@ def logout():
 def login():
     if request.method == 'POST' and 'username' not in session:
         username = request.form['username']
-        password = request.form['password']
+        try:
+            password_hash = sql.login_user(username)["password_hash"]
+        except IndexError:
+            return redirect(url_for("login"))
+        print(data_manager.verify_password(request.form['password'][0], password_hash))
+        if data_manager.verify_password(request.form['password'][0], password_hash):
+            session["username"] = username
+            return redirect("index")
+    return render_template("login.html")
 
 
 if __name__ == '__main__':
