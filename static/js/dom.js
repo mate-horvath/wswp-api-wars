@@ -25,11 +25,11 @@ let dom = {
             <td>${val["surface_water"]}</td>
             <td>${val["population"]}</td>
             <!-- Button trigger modal -->
-            <td id="${val["name"]}ModalButton"></td>
+            <td id="${val["name"].replace(/ /g,'')}ModalButton"></td>
             </tr>`;
             let newNode = $(content);
             newNode.appendTo("#tableBody");
-
+            val["name"] = val["name"].replace(/ /g,'');
             //Add modal if residents are present
             if (val["residents"].length > 0) {
                 let modal = `
@@ -76,6 +76,10 @@ let dom = {
                 $("#" + val["name"] + "ModalButton").bind("click", function () {
                     apiHandler.getModalData(val["name"] ,val["residents"], dom.showModalData)
                 })
+            }
+            else {
+                let content = `<div>No known residents</div>`;
+                $(content).appendTo("#" + val["name"] + "ModalButton")
             }
         });
 
