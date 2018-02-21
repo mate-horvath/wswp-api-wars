@@ -25,17 +25,19 @@
 <body>
 <nav class="navbar navbar-light bg-light container-fluid">
     <div class="d-flex flex-row justify-content-start">
-        <a class="p-2 nav-link" href="#">Planet List</a>
+        <a class="p-2 nav-link" href="{{ url_for("index") }}">Planet List</a>
 
         <a class="p-2 nav-link" href="#">Voting statistics</a>
 
         <a class="p-2 nav-link" href="{{ url_for("registration") }}">Registration</a>
 
-        <a class="p-2 nav-link" href="#">Login</a>
+        <a class="p-2 nav-link" href="{{ url_for("login") }}">Login</a>
 
         <a class="p-2 nav-link" href="{{ url_for("logout") }}">Logout</a>
 
-        <div class="col navbar-text text-right justify-content-end">Logged in</div>
+        <div class="col navbar-text text-right justify-content-end">{% if "username" in session %}
+        Logged in as {{ session["username"] }}
+        {% endif %}</div>
     </div>
 </nav>
 {% block content %} {% endblock %}
