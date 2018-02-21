@@ -21,3 +21,7 @@ button {
 .modal-body {
   overflow-y: auto !important;
 }
+
+h1 {
+    margin: 25px 0px !important;
+}
