@@ -17,3 +17,7 @@ button {
     margin-top: 15px !important;
     margin-bottom: 15px !important;
 }
+
+.modal-body {
+  overflow-y: auto !important;
+}
