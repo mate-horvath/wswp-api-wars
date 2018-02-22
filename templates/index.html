@@ -14,10 +14,19 @@
                 <th>Surface water percentage</th>
                 <th>Population</th>
                 <th>Residents</th>
+                {% if "username" in session %}
+                    <th> {{ " " }}</th> {% endif %}
             </tr>
             </thead>
             <tbody id="tableBody">
             </tbody>
         </table>
     </div>
+    {% if "username" in session %}
+        <template id="VoteButtonTemplate">
+            <td><button id="${val["name"].replace(/ /g,'')}VoteButton" type="button" class="btn">Vote</button></td>
+        </template>
+    {% endif %}
 {% endblock %}
+
+
