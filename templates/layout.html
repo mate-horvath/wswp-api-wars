@@ -29,11 +29,11 @@
 
         <a class="p-2 nav-link" href="#">Voting statistics</a>
 
-        <a class="p-2 nav-link" href="{{ url_for("registration") }}">Registration</a>
+        {% if "username" not in session %}<a class="p-2 nav-link" href="{{ url_for("registration") }}">Registration</a>{% endif %}
 
-        <a class="p-2 nav-link" href="{{ url_for("login") }}">Login</a>
+        {% if "username" not in session %}<a class="p-2 nav-link" href="{{ url_for("login") }}">Login</a>{% endif %}
 
-        <a class="p-2 nav-link" href="{{ url_for("logout") }}">Logout</a>
+        {% if "username" in session %}<a class="p-2 nav-link" href="{{ url_for("logout") }}">Logout</a>{% endif %}
 
         <div class="col navbar-text text-right justify-content-end">{% if "username" in session %}
         Logged in as {{ session["username"] }}
