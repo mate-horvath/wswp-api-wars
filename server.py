@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import sql
 import data_manager
+import json
 
 app = Flask(__name__)
 app.secret_key = 'secret'
@@ -32,13 +33,29 @@ def login():
     if request.method == 'POST' and 'username' not in session:
         username = request.form['username']
         try:
-            password_hash = sql.login_user(username)["password_hash"]
+            user_data = sql.login_user(username)[0]
+            password_hash = user_data["password_hash"]
         except IndexError:
             return redirect(url_for("login"))
         if data_manager.verify_password(request.form['password'][0], password_hash):
             session["username"] = username
+            session["user_id"] = user_data["id"]
             return redirect(url_for("index"))
     return render_template("login.html")
+
+
+@app.route('/vote', methods=['POST'])
+def vote():
+    if data_manager.login_check():
+        vote_data = data_manager.create_vote_data_entry(request.form["planet_name"], request.form["planet_url"])
+        sql.voting(vote_data)
+    return json.dumps({'status': 'OK'})
+
+
+@app.route('/voteStatistics', methods=['POST'])
+def get_statistics():
+    votes = sql.count_votes()
+    return jsonify(votes)
 
 
 if __name__ == '__main__':
