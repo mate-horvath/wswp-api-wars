@@ -25,11 +25,14 @@ let dom = {
             <td>${val["surface_water"]}</td>
             <td>${val["population"]}</td>
             <!-- Button trigger modal -->
-            <td id="${val["name"].replace(/ /g,'')}ModalButton"></td>
+            <td id="${val["name"].replace(/ /g,'')}ModalButtonPlace"></td>
             </tr>`;
             let newNode = $(content);
             newNode.appendTo("#tableBody");
             val["name"] = val["name"].replace(/ /g,'');
+            let voteButton = $("#VoteButtonTemplate").html();
+            let newButton = $(`${voteButton}`);
+            newButton.insertAfter("#"+val["name"]+"ModalButtonPlace");
             //Add modal if residents are present
             if (val["residents"].length > 0) {
                 let modal = `
@@ -71,15 +74,15 @@ let dom = {
 
             //Add modal button to table if residents are present
             if (val["residents"].length > 0) {
-                let modalButton = `<button type="button" class="btn" data-toggle="modal" data-target="#${val["name"]}Modal">${val["residents"].length} resident(s)</button>`;
-                $(modalButton).appendTo("#" + val["name"] + "ModalButton");
+                let modalButton = `<button type="button" id="${val["name"]}ModalButton" class="btn" data-toggle="modal" data-target="#${val["name"]}Modal">${val["residents"].length} resident(s)</button>`;
+                $(modalButton).appendTo("#" + val["name"] + "ModalButtonPlace");
                 $("#" + val["name"] + "ModalButton").bind("click", function () {
                     apiHandler.getModalData(val["name"] ,val["residents"], dom.showModalData)
                 })
             }
             else {
                 let content = `<div>No known residents</div>`;
-                $(content).appendTo("#" + val["name"] + "ModalButton")
+                $(content).appendTo("#" + val["name"] + "ModalButtonPlace")
             }
         });
 
