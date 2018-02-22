@@ -35,10 +35,9 @@ def login():
             password_hash = sql.login_user(username)["password_hash"]
         except IndexError:
             return redirect(url_for("login"))
-        print(data_manager.verify_password(request.form['password'][0], password_hash))
         if data_manager.verify_password(request.form['password'][0], password_hash):
             session["username"] = username
-            return redirect("index")
+            return redirect(url_for("index"))
     return render_template("login.html")
 
 
