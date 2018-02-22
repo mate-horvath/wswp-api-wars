@@ -1,5 +1,6 @@
 import bcrypt
 from flask import session
+import datetime
 
 
 def hash_password(plain_text_password):
@@ -28,3 +29,13 @@ def permission_check(table, id_number):
     else:
         permission = False
     return permission
+
+
+def create_vote_data_entry(planet_name, planet_url):
+    data = dict()
+    planet_id = planet_url.rsplit("/", 2)[1]
+    data["user_id"] = session["user_id"]
+    data["planet_name"] = planet_name
+    data["planet_id"] = planet_id
+    data["submission_time"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return data
