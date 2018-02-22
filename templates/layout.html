@@ -27,7 +27,7 @@
     <div class="d-flex flex-row justify-content-start">
         <a class="p-2 nav-link" href="{{ url_for("index") }}">Planet List</a>
 
-        <a class="p-2 nav-link" href="#">Voting statistics</a>
+        <a class="p-2 nav-link" id="voteStatisticsButton" href="" data-toggle="modal" data-target="#voteStatisticsModal">Voting statistics</a>
 
         {% if "username" not in session %}<a class="p-2 nav-link" href="{{ url_for("registration") }}">Registration</a>{% endif %}
 
@@ -40,6 +40,35 @@
         {% endif %}</div>
     </div>
 </nav>
+
+<!-- Modal -->
+<div class="modal" id="voteStatisticsModal" tabindex="-1" role="dialog" aria-labelledby="voteStatisticsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="voteStatisticsModalLabel">Voting statistics</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <table class="table table-bordered">
+              <thead>
+            <tr>
+                <th>Planet name</th>
+                <th>Received Votes</th>
+            </tr>
+            </thead>
+              <tbody id="voteStatisticsModalBody">
+            </tbody>
+          </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% block content %} {% endblock %}
 </body>
 </html>
