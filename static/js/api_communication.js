@@ -16,5 +16,24 @@ let apiHandler = {
         )).then(residents => {
             callback(planetName, residents);
         })
+    },
+    sendVoteData: function (planetInfo) {
+        $.ajax({
+            type: "POST",
+            url: "/vote",
+            data: planetInfo,
+            success: function () {
+                alert("Vote is Successful")
+            }
+        });
+    },
+    getVoteData: function (callback) {
+        $.ajax({
+            type: "POST",
+            url: "/voteStatistics",
+            success: function (response) {
+                callback(response)
+            }
+        });
     }
 };
