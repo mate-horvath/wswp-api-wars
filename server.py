@@ -19,6 +19,10 @@ def registration():
         password = data_manager.hash_password(request.form['password'])
         try:
             sql.register_user(username, password)
+            user_data = sql.login_user(username)[0]
+            print(user_data)
+            session["username"] = username
+            session["user_id"] = user_data["id"]
             return json.dumps({'status': url_for("index")})
         except:
             return json.dumps({'status': 'FAILED'})
@@ -62,10 +66,3 @@ def vote():
 def get_statistics():
     votes = sql.count_votes()
     return jsonify(votes)
-
-
-if __name__ == '__main__':
-    app.run(
-        host='0.0.0.0',
-        port=5000,
-        debug=True)
