@@ -98,24 +98,20 @@ let dom = {
         //Run loadData with the new URL
         //Add EventListener to previous page button and remove next page when triggered
         $("#previousPage").one("click", function () {
-            if (previous === null) {
-
-            }
-            else {
+            if (previous !== null) {
                 dom.loadData(previous);
                 $("#nextPage").off("click")
             }
 
+
         });
         //Add EventListener to next page button and remove next page when triggered
         $("#nextPage").one("click", function () {
-            if (next === null) {
-
-            }
-            else {
+            if (next !== null) {
                 dom.loadData(next);
                 $("#previousPage").off("click")
             }
+
         });
         //Add listener to vote statistics link
         $("#voteStatisticsButton").bind("click", function () {
