@@ -16,16 +16,20 @@ def index():
 def registration():
     if request.method == "POST":
         username = request.form['username']
-        password = data_manager.hash_password(request.form['password'][0])
-        sql.register_user(username, password)
-        return redirect(url_for("login"))
+        password = data_manager.hash_password(request.form['password'])
+        try:
+            sql.register_user(username, password)
+            return json.dumps({'status': url_for("index")})
+        except:
+            return json.dumps({'status': 'FAILED'})
     return render_template("registration.html")
 
 
 @app.route('/logout', methods=['GET'])
 def logout():
-    session.clear()
-    return redirect(url_for("index"))
+    if data_manager.login_check():
+        session.clear()
+        return redirect(url_for("index"))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -36,11 +40,13 @@ def login():
             user_data = sql.login_user(username)[0]
             password_hash = user_data["password_hash"]
         except IndexError:
-            return redirect(url_for("login"))
-        if data_manager.verify_password(request.form['password'][0], password_hash):
+            return json.dumps({'status': 'FAILED'})
+        if data_manager.verify_password(request.form['password'], password_hash):
             session["username"] = username
             session["user_id"] = user_data["id"]
-            return redirect(url_for("index"))
+            return json.dumps({'status': url_for("index")})
+        else:
+            return json.dumps({'status': 'FAILED'})
     return render_template("login.html")
 
 

@@ -35,5 +35,40 @@ let apiHandler = {
                 callback(response)
             }
         });
-    }
+    },
+    sendLoginData: function (loginInfo) {
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            data: loginInfo,
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data['status'] === 'FAILED') {
+                 alert("Incorrect Credentials");
+                login.clearForm();
+            }
+            else {
+                window.location.href = data['status'];
+            }
+
+            }
+        });
+},
+    sendRegisterData: function (registerInfo) {
+    $.ajax({
+        type: "POST",
+        url: "/registration",
+        data: registerInfo,
+        success: function (data) {
+            data = JSON.parse(data);
+            if (data['status'] === 'FAILED') {
+                alert("Invalid username");
+                register.clearForm();
+            }
+            else {
+                window.location.href = data['status'];
+            }
+        },
+    });
+    },
 };

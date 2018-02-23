@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row"><h1>Login</h1></div>
         <div class="row">
-            <form method="post" action="/login">
+            <form id="loginForm" method="post" action="/login">
                 <!--User name-->
                 <div class="form-group row">
                     <label for="inputUserName" class="col-sm-5 col-form-label">User name</label>
@@ -21,7 +21,7 @@
                 <!--Sign-in-->
                 <div class="form-group row">
                     <div class="col-sm-10 offset-sm-6">
-                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        <button type="button" id="loginButton" class="btn btn-primary">Sign in</button>
                     </div>
                 </div>
             </form>
