@@ -44,31 +44,31 @@ let apiHandler = {
             success: function (data) {
                 data = JSON.parse(data);
                 if (data['status'] === 'FAILED') {
-                 alert("Incorrect Credentials");
-                login.clearForm();
-            }
-            else {
-                window.location.href = data['status'];
-            }
+                    alert("Incorrect Credentials");
+                    login.clearForm();
+                }
+                else {
+                    window.location.href = data['status'];
+                }
 
             }
         });
-},
+    },
     sendRegisterData: function (registerInfo) {
-    $.ajax({
-        type: "POST",
-        url: "/registration",
-        data: registerInfo,
-        success: function (data) {
-            data = JSON.parse(data);
-            if (data['status'] === 'FAILED') {
-                alert("Invalid username");
-                register.clearForm();
-            }
-            else {
-                window.location.href = data['status'];
-            }
-        },
-    });
+        $.ajax({
+            type: "POST",
+            url: "/registration",
+            data: registerInfo,
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data['status'] === 'FAILED') {
+                    alert("Invalid username");
+                    register.clearForm();
+                }
+                else {
+                    window.location.href = data['status'];
+                }
+            },
+        });
     },
 };

@@ -28,24 +28,24 @@ let dom = {
             <td>${val["surface_water"]}</td>
             <td>${val["population"]}</td>
             <!-- Button trigger modal -->
-            <td id="${val["name"].replace(/ /g,'')}ModalButtonPlace"></td>
+            <td id="${val["name"].replace(/ /g, '')}ModalButtonPlace"></td>
             </tr>`;
             let newNode = $(content);
             newNode.appendTo("#tableBody");
 
             //Save the name of the planet and get rid of space in the name of planet so it can be used as an id
             let planetName = val["name"];
-            val["name"] = val["name"].replace(/ /g,'');
+            val["name"] = val["name"].replace(/ /g, '');
 
             //Create vote button
             if ($("#VoteButtonTemplate").length > 0) {
-            let voteButton = $("#VoteButtonTemplate").html().replace("VoteButton",val["name"]+"VoteButton");
-            let newButton = $(voteButton);
-            newButton.insertAfter("#"+val["name"]+"ModalButtonPlace");
+                let voteButton = $("#VoteButtonTemplate").html().replace("VoteButton", val["name"] + "VoteButton");
+                let newButton = $(voteButton);
+                newButton.insertAfter("#" + val["name"] + "ModalButtonPlace");
             }
 
             //Add EventListener to Vote button
-            $("#"+val["name"]+"VoteButton").bind("click", function () {
+            $("#" + val["name"] + "VoteButton").bind("click", function () {
                 let planetInfo = {"planet_name": planetName, "planet_url": val["url"]};
                 apiHandler.sendVoteData(planetInfo)
             });
@@ -71,8 +71,8 @@ let dom = {
                   </div>
                 </div>
               </div>`;
-            let newNode = $(modal);
-            newNode.appendTo("#tableBody");
+                let newNode = $(modal);
+                newNode.appendTo("#tableBody");
             }
 
             //Add modal button to table if residents are present
@@ -80,7 +80,7 @@ let dom = {
                 let modalButton = `<button type="button" id="${val["name"]}ModalButton" class="btn" data-toggle="modal" data-target="#${val["name"]}Modal">${val["residents"].length} resident(s)</button>`;
                 $(modalButton).appendTo("#" + val["name"] + "ModalButtonPlace");
                 $("#" + val["name"] + "ModalButton").bind("click", function () {
-                    apiHandler.getModalData(val["name"] ,val["residents"], dom.showModalData);
+                    apiHandler.getModalData(val["name"], val["residents"], dom.showModalData);
                     $("#" + planetName + "ModalBody").empty().after($($("#loadingMessageTemplate").html()));
                 })
             }
@@ -98,13 +98,18 @@ let dom = {
         //Run loadData with the new URL
         //Add EventListener to previous page button and remove next page when triggered
         $("#previousPage").one("click", function () {
-            dom.loadData(previous);
-            $("#nextPage").off("click")
+            if (previous !== null) {
+                dom.loadData(previous);
+                $("#nextPage").off("click")
+            }
         });
         //Add EventListener to next page button and remove next page when triggered
         $("#nextPage").one("click", function () {
-            dom.loadData(next);
-            $("#previousPage").off("click")
+            if (next !== null) {
+                dom.loadData(next);
+                $("#previousPage").off("click")
+            }
+
         });
         //Add listener to vote statistics link
         $("#voteStatisticsButton").bind("click", function () {
@@ -129,7 +134,7 @@ let dom = {
         let newNode = $(content);
         newNode.appendTo("#" + planetName + "ModalBody");
         $.each(residents, function (index, values) {
-        values = JSON.parse(values);
+            values = JSON.parse(values);
             let content = `
             <tbody>
             <tr>
@@ -143,8 +148,8 @@ let dom = {
             <td>${values["gender"]}</td>
             </tr>
             </tbody>`;
-        let newNode = $(content);
-        newNode.appendTo("#" + planetName + "ModalBody")
+            let newNode = $(content);
+            newNode.appendTo("#" + planetName + "ModalBody")
         })
     },
 
@@ -155,8 +160,8 @@ let dom = {
             <td>${values["planet_name"]}</td>
             <td>${values["vote_count"]}</td>
             </tr>`;
-        let newNode = $(content);
-        newNode.appendTo("#voteStatisticsModalBody")
+            let newNode = $(content);
+            newNode.appendTo("#voteStatisticsModalBody")
         })
     }
 };
