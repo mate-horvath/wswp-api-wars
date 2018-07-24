@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container-fluid" id="contentPart">
+        <h1>Star Wars universe planets</h1>
+        <button type="button" class="btn btn-primary" id="previousPage">Previous</button>
+        <button type="button" class="btn btn-primary" id="nextPage">Next</button>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Diameter in km</th>
+                <th>Climate</th>
+                <th>Terrain</th>
+                <th>Surface water percentage</th>
+                <th>Population</th>
+                <th>Residents</th>
+                {% if "username" in session %}
+                    <th> {{ " " }}</th> {% endif %}
+            </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </div>
+    {% if "username" in session %}
+        <template id="VoteButtonTemplate">
+            <td>
+                <button id="VoteButton" data-planet-name="" type="button" class="btn">Vote</button>
+            </td>
+        </template>
+    {% endif %}
+    <template id="loadingMessageTemplate">
+        <div id='loadingMessage' class='text-center container'>Loading data...please wait</div>
+    </template>
+{% endblock %}
 
-</body>
-</html>
+
