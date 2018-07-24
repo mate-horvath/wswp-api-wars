@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>API Wars</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="static/js/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+            integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
+    <script src="static/js/jquery-3.3.1.js" defer></script>
+    <script src="static/js/login_register.js" defer></script>
+    <script src="static/js/api_communication.js" defer></script>
+</head>
+<body>
+<nav class="navbar navbar-light bg-light container-fluid">
+    <div class="d-flex flex-row justify-content-start">
+        <a class="p-2 nav-link" href="{{ url_for("index") }}">Planet List</a>
+
+        {% if "username" not in session %}<a class="p-2 nav-link" href="{{ url_for("registration") }}">Registration</a> {% endif %}
+
+        {% if "username" not in session %}<a class="p-2 nav-link" href="{{ url_for("login") }}">Login</a>{% endif %}
+
+        {% if "username" in session %}<a class="p-2 nav-link" href="{{ url_for("logout") }}">Logout</a>{% endif %}
+
+        <div class="col navbar-text text-right justify-content-end">{% if "username" in session %}
+        Logged in as {{ session["username"] }}
+        {% endif %}</div>
+    </div>
+</nav>
+{% block content %} {% endblock %}
+</body>
+</html>
